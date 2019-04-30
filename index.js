@@ -2,13 +2,13 @@ const { Toolkit } = require("actions-toolkit");
 
 // Run your GitHub Action!
 Toolkit.run(async tools => {
-  // const contents = tools.getFile("service.metadata.json");
-  console.log("Testing my action!");
-  tools.exit.success("We did it!");
-});
+  const template = tools.arguments._[0] || "service.metadata.json";
 
-/**
- * Action that reads a file and validates it against a schema?
- *
- * Read the values from ENV or Args....
- */
+  tools.log.debug("Reading from file", template);
+
+  const file = tools.getFile(template);
+
+  tools.log.debug("File", file);
+
+  tools.exit.success("Data is all valid");
+});
